@@ -1,0 +1,94 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: etcddumps.etcd.zrq.org.cn
+spec:
+  group: etcd.zrq.org.cn
+  names:
+    kind: Etcddump
+    listKind: EtcddumpList
+    plural: etcddumps
+    singular: etcddump
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: Etcddump is the Schema for the etcddumps API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: EtcddumpSpec defines the desired state of Etcddump
+          properties:
+            clusterReference:
+              type: string
+            scheduler:
+              type: string
+            storage:
+              properties:
+                bucket:
+                  type: string
+                credentialsSecret:
+                  description: LocalObjectReference contains enough information to
+                    let you locate the referenced object inside the same namespace.
+                  properties:
+                    name:
+                      description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                        TODO: Add other useful fields. apiVersion, kind, uid?'
+                      type: string
+                  type: object
+                endpoint:
+                  type: string
+                forcePathStyle:
+                  type: boolean
+                region:
+                  type: string
+              type: object
+          required:
+          - clusterReference
+          - storage
+          type: object
+        status:
+          description: EtcddumpStatus defines the observed state of Etcddump
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastedTranslationTime:
+                    format: date-time
+                    type: string
+                  location:
+                    type: string
+                  message:
+                    type: string
+                  ready:
+                    type: boolean
+                  reason:
+                    type: string
+                required:
+                - lastedTranslationTime
+                - ready
+                type: object
+              type: array
+            phase:
+              type: string
+          required:
+          - phase
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

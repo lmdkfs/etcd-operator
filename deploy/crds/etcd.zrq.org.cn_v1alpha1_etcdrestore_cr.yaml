@@ -1,0 +1,8 @@
+apiVersion: etcd.zrq.org.cn/v1alpha1
+kind: EtcdRestore
+metadata:
+  name: example-etcdrestore
+spec:
+  # Add fields here
+  clusterReference: etcd
+  dataURL: /tmp

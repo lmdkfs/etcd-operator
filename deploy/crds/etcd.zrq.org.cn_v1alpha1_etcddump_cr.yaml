@@ -1,0 +1,8 @@
+apiVersion: etcd.zrq.org.cn/v1alpha1
+kind: Etcddump
+metadata:
+  name: example-etcddump
+spec:
+  # Add fields here
+  # scheduler: '0 0 0/4 * * ?'
+  clusterReference: etcd

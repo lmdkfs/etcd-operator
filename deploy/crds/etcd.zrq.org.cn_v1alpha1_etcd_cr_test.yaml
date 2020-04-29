@@ -1,0 +1,22 @@
+apiVersion: etcd.zrq.org.cn/v1alpha1
+kind: Etcd
+metadata:
+  name: etcd-zrq1
+spec:
+  # Add fields here
+  replicas: 3
+  image: quay.io/coreos/etcd:v3.2.30
+  cluster: true
+  insecure: true
+  clusterType: static
+  initClusterType: static
+  storage: 1 # 单位 G
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "500m"
+    limits:
+      memory: "500Mi"
+      cpu: "500m"
+
+
